@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+class Question {
+    String question;
+    String[] options;
+    int correctAnswerIndex;
+
+    public Question(String question, String[] options, int correctAnswerIndex) {
+        this.question = question;
+        this.options = options;
+        this.correctAnswerIndex = correctAnswerIndex;
+    }
+
+    public boolean isCorrectAnswer(int answer) {
+        return answer == correctAnswerIndex;
+    }
+}
+
+public class QuizSystem {
+    static Question[] questions = new Question[]{
+        new Question("What is the capital of India?", new String[]{"1. New Delhi", "2. Mumbai", "3. Kolkata", "4. Chennai"}, 1),
+        new Question("Who is known as the Father of the Nation?", new String[]{"1. Jawaharlal Nehru", "2. Mahatma Gandhi", "3. Subhash Chandra Bose", "4. Dr. B.R. Ambedkar"}, 2),
+        new Question("Which is the national animal of India?", new String[]{"1. Elephant", "2. Tiger", "3. Peacock", "4. Lion"}, 2),
+        new Question("Who wrote the Indian national anthem?", new String[]{"1. Rabindranath Tagore", "2. Sarojini Naidu", "3. Bankim Chandra Chatterjee", "4. Mahatma Gandhi"}, 1),
+        new Question("What is the national flower of India?", new String[]{"1. Rose", "2. Sunflower", "3. Lotus", "4. Marigold"}, 3),
+        new Question("Which city is known as the Silicon Valley of India?", new String[]{"1. Hyderabad", "2. Bangalore", "3. Pune", "4. Chennai"}, 2),
+        new Question("What is the national currency of India?", new String[]{"1. Dollar", "2. Euro", "3. Rupee", "4. Yen"}, 3),
+        new Question("Who is the first Prime Minister of India?", new String[]{"1. Mahatma Gandhi", "2. Rajendra Prasad", "3. Jawaharlal Nehru", "4. Sardar Patel"}, 3),
+        new Question("What is the national bird of India?", new String[]{"1. Eagle", "2. Sparrow", "3. Peacock", "4. Pigeon"}, 3),
+        new Question("Which is the largest state of India by area?", new String[]{"1. Maharashtra", "2. Rajasthan", "3. Uttar Pradesh", "4. Madhya Pradesh"}, 2),
+    };
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int score = 0;
+
+        System.out.println("Welcome to the India Quiz!");
+        for (int i = 0; i < questions.length; i++) {
+            System.out.println("\nQuestion " + (i + 1) + ": " + questions[i].question);
+            for (String option : questions[i].options) {
+                System.out.println(option);
+            }
+
+            System.out.print("Enter your answer (1-4): ");
+            int answer = scanner.nextInt();
+
+            if (questions[i].isCorrectAnswer(answer - 1)) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                System.out.println("Wrong! The correct answer was " + (questions[i].correctAnswerIndex + 1));
+            }
+        }
+
+        System.out.println("\nQuiz Completed!");
+        System.out.println("Your score is: " + score + "/" + questions.length);
+
+        if (score >= 8) {
+            System.out.println("Congratulations! You did an excellent job.");
+        } else {
+            System.out.println("Keep learning! You'll get better next time.");
+        }
+
+        scanner.close();
+    }
+}
